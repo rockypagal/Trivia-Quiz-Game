@@ -1,23 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { useState } from "react";
+import TriviaPage from "./modules/TriviaPage";
+import "./utils/App.css";
+import ResultPage from "./modules/ResultPage";
 function App() {
+  const [showResult, setShowResult] = useState(false);
+  const [questionCount, setQuestionCount] = useState(0);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="trivia-container">
+        <h1 className="trivia-heading">Trivia Quiz Game</h1>
+        {showResult ? (
+          <ResultPage
+            setQuestionCount={setQuestionCount}
+            setShowResult={setShowResult}
+          />
+        ) : (
+          <TriviaPage
+            setShowResult={setShowResult}
+            showResult={showResult}
+            setQuestionCount={setQuestionCount}
+            questionCount={questionCount}
+          />
+        )}
+      </div>
     </div>
   );
 }
